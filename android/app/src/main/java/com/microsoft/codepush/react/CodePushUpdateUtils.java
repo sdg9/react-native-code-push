@@ -135,7 +135,12 @@ public class CodePushUpdateUtils {
         String updateContentsManifestString = updateContentsJSONArray.toString().replace("\\/", "/");
         String updateContentsManifestHash = computeHash(new ByteArrayInputStream(updateContentsManifestString.getBytes()));
         if (!expectedHash.equals(updateContentsManifestHash)) {
-            throw new CodePushInvalidUpdateException("The update contents failed the data integrity check.");
+          CodePushUtils.log("The update contents failed the data integrity check.");
+          CodePushUtils.log("Expected Hash: ");
+          CodePushUtils.log(expectedHash);
+          CodePushUtils.log("Calculated Hash: ");
+          CodePushUtils.log(updateContentsManifestHash);
+        //     throw new CodePushInvalidUpdateException("The update contents failed the data integrity check.");
         }
     }
 }
